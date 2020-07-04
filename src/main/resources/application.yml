@@ -1,0 +1,11 @@
+
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  jpa:
+    open-in-view: false
+  output:
+    ansi:
+      enabled: always
