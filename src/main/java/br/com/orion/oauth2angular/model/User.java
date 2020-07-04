@@ -4,17 +4,21 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(of = "firstName")
+@EqualsAndHashCode(of = "id")
 @Document("USER")
 public class User {
 

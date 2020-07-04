@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.orion.oauth2angular.model.User;
+import br.com.orion.oauth2angular.model.dto.UserDto;
 
 @Service
 public interface IUserService {
@@ -14,4 +15,10 @@ public interface IUserService {
     public User findById(String id);
 
     public List<User> findAll();
+
+    public User fromDto(UserDto dto);
+
+    public UserDto toDto(User user);
+
+
 }

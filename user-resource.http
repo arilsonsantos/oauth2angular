@@ -15,6 +15,6 @@ POST {{host}}
 Content-Type: application/json
 
 {
-    "firstName": "John Lennon",
-    "email": "jhon@email"
+    "firstName": "01",
+    "email": "1@email"
 }

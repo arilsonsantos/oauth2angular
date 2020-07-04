@@ -27,7 +27,9 @@ public class UserResource {
     private ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
+    public ResponseEntity<UserDto> save(@RequestBody UserDto dto) {
+        User user = service.fromDto(dto);
+        service.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -42,9 +44,10 @@ public class UserResource {
     @GetMapping("/id/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable String id){
         User user = service.findById(id);
-        UserDto dto = mapper.map(user, UserDto.class);
+        UserDto dto = service.toDto(user);
         return ResponseEntity.ok().body(dto);
     }
+
 
     // @ResponseStatus(code = HttpStatus.OK)
     // @GetMapping(name = "page")
