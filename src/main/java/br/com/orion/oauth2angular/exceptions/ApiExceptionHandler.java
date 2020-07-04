@@ -3,6 +3,8 @@ package br.com.orion.oauth2angular.exceptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,15 +44,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
     
+    
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ResponseEntity<ErrorDetail> handleResourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
 
         ErrorDetail error = ErrorDetail.builder()
         .statusCode(HttpStatus.NOT_FOUND.value())
+        .path(request.getRequestURI())
         .message(ex.getMessage())
                 .build();
         
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
    
