@@ -1,13 +1,15 @@
 package br.com.orion.oauth2angular.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import br.com.orion.oauth2angular.model.User;
 
+@Service
 public interface IUserService {
 
     public User save(User user);
 
-    public Page<User> findAll(Pageable pageable);
+    public List<User> findAll();
 }

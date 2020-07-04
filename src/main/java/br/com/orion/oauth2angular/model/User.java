@@ -1,9 +1,8 @@
 package br.com.orion.oauth2angular.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,20 +10,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Builder
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@ToString(of = "firsName")
+@ToString(of = "firstName")
+@Document("USER")
 public class User {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    private String fisrtName;
+    private String firstName;
 
     private String email;
 

@@ -31,13 +31,13 @@ public class UserServiceTest {
     @Test
     public void valida_save_ok() {
 
-        User user = User.builder().fisrtName("Joao").email("joao@email.com").build();
-        User savedUser = User.builder().id(1L).fisrtName("Joao").email("joao@email.com").build();
+        User user = User.builder().firstName("Joao").email("joao@email.com").build();
+        User savedUser = User.builder().id("1").firstName("Joao").email("joao@email.com").build();
 
         when(service.save(user)).thenReturn(savedUser);
         savedUser = service.save(user); 
 
-        Assertions.assertThat(savedUser.getId()).isEqualTo(1L);
+        Assertions.assertThat(savedUser.getId()).isEqualTo("1");
 
     }
 }
