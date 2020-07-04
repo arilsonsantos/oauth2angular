@@ -12,7 +12,13 @@ public interface IUserService {
 
     public User save(User user);
 
+    public User update(User user);
+
     public User findById(String id);
+
+    public User findByUser(User user);
+
+    public void deleteById(String id);
 
     public List<User> findAll();
 

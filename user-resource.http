@@ -6,7 +6,7 @@
 
 ###
 
-{{host}}/id/5f00b5169a481147d04480611
+{{host}}/5f00d65dcd195f0665b9cddd
 
 
 ###
@@ -15,6 +15,21 @@ POST {{host}}
 Content-Type: application/json
 
 {
-    "firstName": "01",
-    "email": "1@email"
+    "firstName": "02",
+    "email": "2@email"
 }
+
+###
+
+PUT {{host}}
+Content-Type: application/json
+
+{
+    "id":"5f00ef5195ac016deade6fe3",
+    "firstName": "00003",
+    "email": "00003@email"
+}
+
+###
+
+DELETE {{host}}/5f00ef5195ac016deade6fe3

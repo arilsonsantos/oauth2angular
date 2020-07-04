@@ -19,8 +19,19 @@ public class UserService implements IUserService {
     private UserRepository repository;
 
     public User save(User user) {
-
         return repository.save(user);
+    }
+
+    public User update(User user){
+        User userToUpdate = findByUser(user);
+
+        userToUpdate = User.builder()
+            .id(userToUpdate.getId())
+            .firstName(user.getFirstName())
+            .email(user.getEmail())
+            .build();
+
+        return  save(userToUpdate);
     }
 
     public List<User> findAll() {
@@ -33,6 +44,12 @@ public class UserService implements IUserService {
         return user.orElseThrow(() -> new ResourceNotFoundException("Resource not found."));
     }
 
+    @Override
+    public User findByUser(User user) {
+        Optional<User> userFound = repository.findById(user.getId());
+        return userFound.orElseThrow(() -> new ResourceNotFoundException("Resource not found."));
+    }
+
     public User fromDto(UserDto dto){
         ModelMapper mapper = new ModelMapper();
         User user = mapper.map(dto, User.class);
@@ -43,6 +60,12 @@ public class UserService implements IUserService {
         ModelMapper mapper = new ModelMapper();
         UserDto userDto = mapper.map(user, UserDto.class);
         return userDto;
+    }
+
+    @Override
+    public void deleteById(String id) {
+        User userToDelete = findById(id);
+        repository.delete(userToDelete);
     }
 
 }
