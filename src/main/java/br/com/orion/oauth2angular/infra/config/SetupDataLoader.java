@@ -25,9 +25,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createUserIfNotFound(user2);
     }
 
-    private User createUserIfNotFound(final User user) {
+    private void createUserIfNotFound(final User user) {
         Optional<User> obj = repository.findByEmail(user.getEmail());
-        return obj.orElse(repository.save(user));
+        if (obj.isPresent()){
+            return;
+        }
+        repository.save(user);
     }
 
 }
