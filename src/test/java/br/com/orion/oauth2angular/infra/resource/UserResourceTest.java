@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.orion.oauth2angular.AbstractTest;
@@ -32,6 +35,7 @@ public class UserResourceTest extends AbstractTest {
 
     @MockBean
     UserService service;
+
 
     @Test
     @DisplayName("Validate create user CREATED")
@@ -57,17 +61,11 @@ public class UserResourceTest extends AbstractTest {
 
         List<User> users = List.of(user1, user2);
 
-        // PageRequest pageRequest = PageRequest.of(0, 10);
-        // Page<User> page = new PageImpl<User>(users, pageRequest, 1);
+        BDDMockito.given(service.findAll()).willReturn(users);
 
-        BDDMockito.given(service.findAll())
-        .willReturn(users);
-
-        String queryString = "?/page=0&size=100";
-        var request = MockMvcRequestBuilders.get(USER_URI.concat(queryString)).contentType(MediaType.APPLICATION_JSON);
-
-        mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("content", Matchers.hasSize(2)));
+        var request = MockMvcRequestBuilders.get(USER_URI).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+    
+        mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk());
     }
     
 }

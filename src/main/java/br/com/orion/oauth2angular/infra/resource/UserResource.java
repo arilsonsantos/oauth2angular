@@ -26,7 +26,6 @@ import lombok.AllArgsConstructor;
 public class UserResource {
 
     private IUserService service;
-    private ModelMapper mapper;
 
     @PostMapping
     public ResponseEntity<UserDto> save(@RequestBody UserDto dto) {
@@ -44,6 +43,7 @@ public class UserResource {
 
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {
+        ModelMapper mapper = new ModelMapper();
         List<User> users = service.findAll();
         List<UserDto> dtos = users.stream().map(u -> mapper.map(u, UserDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtos);
@@ -63,15 +63,4 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
-
-
-    // @ResponseStatus(code = HttpStatus.OK)
-    // @GetMapping(name = "page")
-    // public Page<User> findAll(Pageable pageRequest){
-    // Page<User> result = service.findAll(pageRequest);
-
-    // List<User> list = result.getContent();
-
-    // return new PageImpl<>(list, pageRequest, result.getTotalElements());
-    // }
 }
