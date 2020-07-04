@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,14 @@ public class UserResource {
         List<User> users = service.findAll();
         List<UserDto> dtos = users.stream().map(u -> mapper.map(u, UserDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtos);
+    }
+
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<UserDto> findById(@PathVariable String id){
+        User user = service.findById(id);
+        UserDto dto = mapper.map(user, UserDto.class);
+        return ResponseEntity.ok().body(dto);
     }
 
     // @ResponseStatus(code = HttpStatus.OK)

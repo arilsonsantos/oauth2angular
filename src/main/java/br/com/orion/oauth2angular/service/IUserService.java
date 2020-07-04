@@ -11,5 +11,7 @@ public interface IUserService {
 
     public User save(User user);
 
+    public User findById(String id);
+
     public List<User> findAll();
 }
