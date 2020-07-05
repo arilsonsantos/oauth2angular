@@ -10,8 +10,7 @@
 	<groupId>br.com.orion</groupId>
 	<artifactId>oauth2angular</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ouath2angular</name>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

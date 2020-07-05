@@ -1,7 +1,10 @@
 package br.com.orion.oauth2angular.model;
 
+import java.util.List;
+
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +26,7 @@ import lombok.ToString;
 public class User {
 
 
+
     @Id
     private String id;
 
@@ -30,4 +34,7 @@ public class User {
 
     private String email;
 
+    @DBRef (lazy = true)
+    private List<Role> roles;
+    
 }

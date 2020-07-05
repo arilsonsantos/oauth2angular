@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.orion.oauth2angular.model.Role;
 import br.com.orion.oauth2angular.model.User;
 import br.com.orion.oauth2angular.model.dto.UserDto;
 import br.com.orion.oauth2angular.service.IUserService;
@@ -61,6 +62,12 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable String id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/roles")
+    public ResponseEntity<List<Role>> findRoles(@PathVariable String id){
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(user.getRoles());
     }
 
 }
