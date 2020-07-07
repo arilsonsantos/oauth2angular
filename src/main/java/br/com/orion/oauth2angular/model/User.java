@@ -1,26 +1,40 @@
 package br.com.orion.oauth2angular.model;
 
-import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.Id;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Builder
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(of = "firstName")
 @EqualsAndHashCode(of = "id")
-@ToString(of = "firsName")
-public class User implements Serializable {
+@Document("USER")
+public class User {
 
-    private static final long serialVersionUID = 1L;
 
-    private Long id;
 
-    private String fisrtName;
+    @Id
+    private String id;
+
+    private String firstName;
 
     private String email;
 
+    @DBRef (lazy = true)
+    private List<Role> roles;
+    
 }
